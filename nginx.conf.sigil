@@ -99,7 +99,7 @@ server {
   {{ if $.SEND_TIMEOUT }}send_timeout {{ $.SEND_TIMEOUT }};{{end}}
 
   location    / {
-    limit_req zone=all_zone burst=20 delay=10;
+    limit_req zone=all_zone burst=20 nodelay;
 
     gzip on;
     gzip_min_length  1100;
