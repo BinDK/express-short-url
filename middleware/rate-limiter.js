@@ -8,7 +8,7 @@ const generalLimiter = rateLimit({
   max: maximumReqPerIP,
   standardHeaders: true,
   legacyHeaders: false,
-  message: 'Too many requests.',
+  message: 'Too many requests, try again later.',
 });
 
 module.exports = { generalLimiter };
