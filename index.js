@@ -1,11 +1,14 @@
 require('dotenv').config();
 require('./jobs/cronJobs');
-const express = require('express');
 
+const express = require('express');
 const urlRoutes = require('./routes/urls');
 const shortCodeRoute = require('./routes/shortCode')
-
+const { generalLimiter } = require('./middleware/rate-limiter');
 const app = express();
+
+app.set('trust proxy', 1);
+app.use(generalLimiter);
 app.use(express.json());
 const port = process.env.PORT || 3000;
 
