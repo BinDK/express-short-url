@@ -20,7 +20,7 @@ router.get('/:shortCode', async (req, res) => {
       return res.redirect(longUrl);
     }
 
-    res.status(404).json({ error: 'Short URL not found' });
+    res.redirect('/?error=not_found');
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
