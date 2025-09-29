@@ -17,12 +17,12 @@ router.post('/encode', async (req, res) => {
     const shortCode = nanoid(8);
     const shortUrl = `${baseUrl}/${shortCode}`;
 
-    const result = await pool.query(
+    await pool.query(
       'INSERT INTO urls (short_code, long_url) VALUES ($1, $2) RETURNING *',
       [shortCode, longUrl]
     );
 
-    res.json({ shortUrl });
+    res.render("index", { shortUrl });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });

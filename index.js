@@ -7,15 +7,24 @@ const shortCodeRoute = require('./routes/shortCode')
 const { generalLimiter } = require('./middleware/rate-limiter');
 const app = express();
 
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
 app.set('trust proxy', 1);
 app.use(generalLimiter);
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 const port = process.env.PORT || 3000;
 
 // Routes
 // Root
 app.get('/', (req, res) => {
-  res.status(200).send('App is working');
+  const { shortUrl, error } = req.query;
+  let shortUrlError;
+  if (error === 'not_found') {
+    shortUrlError = 'Short URL not found or expired.';
+  }
+  res.render('index', { shortUrl, shortUrlError });
 });
 // Health check
 app.get('/up', (_, res) => {
