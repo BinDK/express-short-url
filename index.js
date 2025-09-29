@@ -13,6 +13,10 @@ app.use(express.json());
 const port = process.env.PORT || 3000;
 
 // Routes
+// Root
+app.get('/', (req, res) => {
+  res.status(200).send('App is working');
+});
 // Health check
 app.get('/up', (_, res) => {
   res.status(200).send('OK');
