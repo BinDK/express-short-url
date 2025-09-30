@@ -6,7 +6,7 @@
     "start": "node index.js",
     "init-db": "node scripts/init-db.js",
     "serve": "npm run init-db && npm run start",
-    "test": "vitest run ."
+    "test": "vitest run"
   },
   "keywords": [],
   "author": "",
